@@ -68,4 +68,8 @@ public class MyFileWriter {
         File file = new File(fileName);
         System.out.println(file.length());
     }
+
+    public static String toString() {
+        return "File name: MyFileWrtiter";
+    }
 }
