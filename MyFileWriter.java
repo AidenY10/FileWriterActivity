@@ -3,7 +3,7 @@ import java.nio.file.*;
 import java.nio.charset.StandardCharsets;
 
 public class MyFileWriter {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         String data = "Hello, World!";
         String fileName1 = "example.txt";
         String fileName2 = "example2.txt";
@@ -11,8 +11,9 @@ public class MyFileWriter {
         String fileName4 = "example4.txt";
         String fileName5 = "example5.txt";
         System.out.println(System.getProperty("user.dir"));
-        generateHiddenFile();
-        generateRegFile();
+        // generateHiddenFile();
+        // generateRegFile();
+        printFileSize("aiden.txt");
 
         // 1. Using FileWriter
         try (FileWriter writer = new FileWriter(fileName1)) {
@@ -60,5 +61,11 @@ public class MyFileWriter {
         Files.createDirectory(folder);
         Path file = folder.resolve("findme.txt");
         Files.writeString(file, "SSN: 1234567");
+    }
+
+    // Calculate and print the file size using the File class
+    private static void printFileSize(String fileName) {
+        File file = new File(fileName);
+        System.out.println(file.length());
     }
 }
