@@ -11,10 +11,22 @@ public class MyFileWriter {
         String fileName3 = "example3.txt";
         String fileName4 = "example4.txt";
         String fileName5 = "example5.txt";
+        String psTestFile = "priscillaTest!";
         System.out.println(System.getProperty("user.dir"));
         // generateHiddenFile();
         // generateRegFile();
+<<<<<<< HEAD
         // printFileSize("aiden.txt");
+=======
+        printFileSize(psTestFile); //testing filesize method i added
+
+        //Creates the priscilla test file
+        try (FileOutputStream outputStream = new FileOutputStream(psTestFile)) {
+            outputStream.write(data.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+>>>>>>> origin/main
 
         // 1. Using FileWriter
         try (FileWriter writer = new FileWriter(fileName1)) {
@@ -36,6 +48,8 @@ public class MyFileWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        
 
         // 4. Using BufferedOutputStream
         try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(fileName4))) {
@@ -65,10 +79,15 @@ public class MyFileWriter {
     }
 
     // Calculate and print the file size using the File class
-    private static void printFileSize(String fileName) {
+    private static void printFileSize(String... fileNames) {
+    long totalSize = 0;
+    for (String fileName : fileNames) {
         File file = new File(fileName);
-        System.out.println(file.length());
+        if (file.exists()) {
+            totalSize += file.length();
+        }
     }
+<<<<<<< HEAD
 
     public static String hashFile(String path) throws IOException {
         String contents = Files.readString(Path.of(path));
@@ -89,4 +108,8 @@ public class MyFileWriter {
         }
         return hexString.toString();
     }
+=======
+    System.out.println("Total size of all files: " + totalSize + " bytes");
+}
+>>>>>>> origin/main
 }
