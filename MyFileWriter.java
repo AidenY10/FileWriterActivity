@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.*;
+import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;
 
 public class MyFileWriter {
@@ -13,7 +14,7 @@ public class MyFileWriter {
         System.out.println(System.getProperty("user.dir"));
         // generateHiddenFile();
         // generateRegFile();
-        printFileSize("aiden.txt");
+        // printFileSize("aiden.txt");
 
         // 1. Using FileWriter
         try (FileWriter writer = new FileWriter(fileName1)) {
@@ -67,5 +68,25 @@ public class MyFileWriter {
     private static void printFileSize(String fileName) {
         File file = new File(fileName);
         System.out.println(file.length());
+    }
+
+    public static String hashFile(String path) throws IOException {
+        String contents = Files.readString(Path.of(path));
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] encodedhash = digest.digest(contents.getBytes(StandardCharsets.UTF_8));
+        return bytesToHex(encodedhash);
+
+    }
+
+    private static String bytesToHex(byte[] hash) {
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 }
