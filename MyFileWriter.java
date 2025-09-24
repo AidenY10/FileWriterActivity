@@ -128,4 +128,8 @@ public class MyFileWriter {
         }
         return false;
     }
+
+    public static String toString() {
+        return "File name: MyFileWrtiter";
+    }
 }
